@@ -1,0 +1,1869 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yorum Ekspres | Profesyonel Online İtibar Yönetimi</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #4361ee;
+        --primary-dark: #3a0ca3;
+        --secondary: #4895ef;
+        --accent: #4cc9f0;
+        --dark: #2b2d42;
+        --light: #f8f9fa;
+        --gray: #6c757d;
+        --light-gray: #e9ecef;
+        --success: #38b000;
+        --danger: #ef233c;
+        --warning: #ff9e00;
+        --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+        --transition: all 0.3s ease;
+        --radius: 12px;
+        --radius-sm: 8px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        color: var(--dark);
+        background-color: var(--light);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      section {
+        padding: 100px 0;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-weight: 700;
+        line-height: 1.3;
+      }
+
+      p {
+        color: var(--gray);
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .btn {
+        display: inline-block;
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-dark)
+        );
+        color: white;
+        padding: 12px 28px;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: var(--transition);
+        border: none;
+        cursor: pointer;
+        box-shadow: var(--shadow);
+        text-align: center;
+      }
+
+      .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .btn-outline {
+        background: transparent;
+        border: 2px solid var(--primary);
+        color: var(--primary);
+      }
+
+      .btn-outline:hover {
+        background: var(--primary);
+        color: white;
+      }
+
+      .btn-block {
+        display: block;
+        width: 100%;
+      }
+
+      .text-center {
+        text-align: center;
+      }
+
+      .section-title {
+        margin-bottom: 60px;
+        text-align: center;
+      }
+
+      .section-title h2 {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+        position: relative;
+        display: inline-block;
+      }
+
+      .section-title h2:after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(to right, var(--primary), var(--accent));
+        border-radius: 2px;
+      }
+
+      .section-title p {
+        max-width: 700px;
+        margin: 0 auto;
+        font-size: 1.1rem;
+      }
+
+      /* Header */
+      header {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        background-color: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        transition: var(--transition);
+      }
+
+      header.scrolled {
+        padding: 10px 0;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: var(--primary);
+      }
+
+      .logo img {
+        height: 40px;
+        margin-right: 10px;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+      }
+
+      .nav-links li {
+        margin-left: 30px;
+        position: relative;
+      }
+
+      .nav-links a {
+        font-weight: 500;
+        transition: var(--transition);
+      }
+
+      .nav-links a:hover {
+        color: var(--primary);
+      }
+
+      .nav-links li:after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--primary);
+        transition: var(--transition);
+      }
+
+      .nav-links li:hover:after {
+        width: 100%;
+      }
+
+      .mobile-menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: var(--dark);
+        cursor: pointer;
+      }
+
+      /* Hero */
+      .hero {
+        padding: 180px 0 120px;
+        background: linear-gradient(135deg, #f5f7ff 0%, #eef2ff 100%);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero:before {
+        content: "";
+        position: absolute;
+        top: -50px;
+        right: -50px;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(
+          circle,
+          rgba(67, 97, 238, 0.1) 0%,
+          rgba(67, 97, 238, 0) 70%
+        );
+        border-radius: 50%;
+      }
+
+      .hero-content {
+        display: flex;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-text {
+        flex: 1;
+        padding-right: 50px;
+      }
+
+      .hero-image {
+        flex: 1;
+        position: relative;
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .hero h1 {
+        font-size: 3.2rem;
+        margin-bottom: 20px;
+        line-height: 1.2;
+      }
+
+      .hero p {
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+        color: var(--gray);
+      }
+
+      .hero-buttons {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 40px;
+      }
+
+      .stats {
+        display: flex;
+        gap: 30px;
+      }
+
+      .stat-item {
+        background: white;
+        padding: 20px;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        text-align: center;
+        min-width: 160px;
+      }
+
+      .stat-item h3 {
+        font-size: 2.2rem;
+        color: var(--primary);
+        margin-bottom: 5px;
+      }
+
+      .stat-item p {
+        font-size: 0.9rem;
+      }
+
+      /* How It Works */
+      .how-it-works {
+        background-color: white;
+      }
+
+      .steps {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 50px;
+        position: relative;
+      }
+
+      .step {
+        flex: 1;
+        padding: 0 20px;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      .step-number {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-dark)
+        );
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin: 0 auto 25px;
+        box-shadow: 0 10px 20px rgba(67, 97, 238, 0.2);
+      }
+
+      .step h3 {
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+      }
+
+      .step p {
+        color: var(--gray);
+      }
+
+      .steps:before {
+        content: "";
+        position: absolute;
+        top: 30px;
+        left: 15%;
+        width: 70%;
+        height: 2px;
+        background: linear-gradient(to right, var(--primary), var(--accent));
+        z-index: 0;
+      }
+
+      /* Pricing */
+      .pricing {
+        background-color: #f9faff;
+      }
+
+      .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 50px;
+      }
+
+      .pricing-card {
+        background-color: white;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 40px 30px;
+        transition: var(--transition);
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--light-gray);
+      }
+
+      .pricing-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .pricing-card.popular {
+        border: 2px solid var(--primary);
+      }
+
+      .popular-tag {
+        position: absolute;
+        top: 15px;
+        right: -30px;
+        background-color: var(--primary);
+        color: white;
+        padding: 5px 30px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        transform: rotate(45deg);
+      }
+
+      .pricing-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+      }
+
+      .price {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 20px;
+      }
+
+      .price span {
+        font-size: 1rem;
+        color: var(--gray);
+        font-weight: normal;
+      }
+
+      .pricing-features {
+        margin-bottom: 30px;
+      }
+
+      .pricing-features li {
+        margin-bottom: 12px;
+        position: relative;
+        padding-left: 30px;
+      }
+
+      .pricing-features li:before {
+        content: "\f00c";
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        position: absolute;
+        left: 0;
+        color: var(--success);
+      }
+
+      /* Testimonials */
+      .testimonials {
+        background-color: white;
+      }
+
+      .testimonial-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 50px;
+      }
+
+      .testimonial-card {
+        background-color: white;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 30px;
+        transition: var(--transition);
+        border: 1px solid var(--light-gray);
+      }
+
+      .testimonial-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .testimonial-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .testimonial-avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 15px;
+        border: 3px solid var(--primary);
+      }
+
+      .testimonial-author h4 {
+        margin-bottom: 5px;
+      }
+
+      .testimonial-author p {
+        color: var(--gray);
+        font-size: 0.9rem;
+      }
+
+      .testimonial-rating {
+        color: #ffc107;
+        margin-bottom: 15px;
+      }
+
+      /* Contact */
+      .contact {
+        background: linear-gradient(135deg, #f5f7ff 0%, #eef2ff 100%);
+      }
+
+      .contact-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 50px;
+        margin-top: 50px;
+      }
+
+      .contact-info {
+        background-color: white;
+        padding: 40px;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+      }
+
+      .contact-info h3 {
+        margin-bottom: 30px;
+        font-size: 1.5rem;
+      }
+
+      .contact-item {
+        display: flex;
+        margin-bottom: 25px;
+      }
+
+      .contact-icon {
+        width: 50px;
+        height: 50px;
+        background-color: rgba(67, 97, 238, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+        color: var(--primary);
+        font-size: 1.2rem;
+      }
+
+      .contact-text h4 {
+        margin-bottom: 5px;
+      }
+
+      .contact-text p,
+      .contact-text a {
+        color: var(--gray);
+        transition: var(--transition);
+      }
+
+      .contact-text a:hover {
+        color: var(--primary);
+      }
+
+      .contact-form {
+        background-color: white;
+        padding: 40px;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+      }
+
+      .contact-form h3 {
+        margin-bottom: 30px;
+        font-size: 1.5rem;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+      }
+
+      .form-group input,
+      .form-group textarea,
+      .form-group select {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: var(--radius-sm);
+        font-size: 1rem;
+        transition: var(--transition);
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus,
+      .form-group select:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+        outline: none;
+      }
+
+      .form-group textarea {
+        min-height: 150px;
+        resize: vertical;
+      }
+
+      /* Payment Modal */
+      .payment-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 2000;
+        justify-content: center;
+        align-items: center;
+        backdrop-filter: blur(5px);
+      }
+
+      .payment-content {
+        background-color: white;
+        border-radius: var(--radius);
+        padding: 40px;
+        width: 90%;
+        max-width: 500px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        position: relative;
+        animation: modalFadeIn 0.4s ease-out;
+      }
+
+      @keyframes modalFadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--gray);
+        transition: var(--transition);
+      }
+
+      .close-btn:hover {
+        color: var(--primary);
+        transform: rotate(90deg);
+      }
+
+      .payment-content h3 {
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+      }
+
+      .payment-content p.subtitle {
+        margin-bottom: 30px;
+        color: var(--gray);
+      }
+
+      .card-row {
+        display: flex;
+        gap: 15px;
+      }
+
+      .card-row .form-group {
+        flex: 1;
+      }
+
+      .card-icons {
+        display: flex;
+        gap: 10px;
+        margin: 20px 0;
+      }
+
+      .card-icons img {
+        height: 30px;
+        opacity: 0.7;
+        transition: var(--transition);
+      }
+
+      .card-icons img:hover {
+        opacity: 1;
+      }
+
+      .payment-success {
+        display: none;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .payment-success i {
+        font-size: 5rem;
+        color: var(--success);
+        margin-bottom: 20px;
+        animation: bounce 0.6s;
+      }
+
+      @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateY(0);
+        }
+        40% {
+          transform: translateY(-20px);
+        }
+        60% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .payment-success h3 {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+      }
+
+      .payment-success p {
+        margin-bottom: 30px;
+        font-size: 1.1rem;
+      }
+
+      /* FAQ */
+      .faq {
+        background-color: white;
+      }
+
+      .accordion {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .accordion-item {
+        margin-bottom: 15px;
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+      }
+
+      .accordion-header {
+        background-color: var(--light);
+        padding: 15px 20px;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 600;
+        transition: var(--transition);
+      }
+
+      .accordion-header:hover {
+        background-color: #e9ecef;
+      }
+
+      .accordion-header i {
+        transition: var(--transition);
+      }
+
+      .accordion-content {
+        padding: 0 20px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+      }
+
+      .accordion-item.active .accordion-header {
+        background-color: var(--primary);
+        color: white;
+      }
+
+      .accordion-item.active .accordion-header i {
+        transform: rotate(180deg);
+      }
+
+      .accordion-item.active .accordion-content {
+        padding: 20px;
+        max-height: 500px;
+      }
+
+      /* Footer */
+      footer {
+        background-color: var(--dark);
+        color: white;
+        padding: 80px 0 30px;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 40px;
+        margin-bottom: 50px;
+      }
+
+      .footer-column h3 {
+        font-size: 1.3rem;
+        margin-bottom: 25px;
+        position: relative;
+        padding-bottom: 10px;
+      }
+
+      .footer-column h3:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 40px;
+        height: 3px;
+        background: linear-gradient(to right, var(--primary), var(--accent));
+      }
+
+      .footer-column p {
+        margin-bottom: 20px;
+        opacity: 0.8;
+        line-height: 1.6;
+      }
+
+      .footer-links {
+        margin-bottom: 20px;
+      }
+
+      .footer-links li {
+        margin-bottom: 12px;
+      }
+
+      .footer-links a {
+        color: #ddd;
+        transition: var(--transition);
+        display: block;
+      }
+
+      .footer-links a:hover {
+        color: white;
+        transform: translateX(5px);
+      }
+
+      .social-links {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .social-links a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        color: white;
+        font-size: 1.1rem;
+        transition: var(--transition);
+      }
+
+      .social-links a:hover {
+        background-color: var(--primary);
+        transform: translateY(-3px);
+      }
+
+      .newsletter-form input {
+        width: 100%;
+        padding: 12px 15px;
+        border: none;
+        border-radius: var(--radius-sm);
+        margin-bottom: 10px;
+        font-size: 1rem;
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding-top: 30px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: #aaa;
+        font-size: 0.9rem;
+      }
+
+      .footer-bottom a {
+        color: #ddd;
+        transition: var(--transition);
+      }
+
+      .footer-bottom a:hover {
+        color: var(--primary);
+      }
+
+      /* Animations */
+      @keyframes float {
+        0% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-15px);
+        }
+        100% {
+          transform: translateY(0px);
+        }
+      }
+
+      /* Responsive */
+      @media (max-width: 992px) {
+        .hero-content {
+          flex-direction: column;
+        }
+
+        .hero-text {
+          padding-right: 0;
+          margin-bottom: 50px;
+          text-align: center;
+        }
+
+        .hero-buttons {
+          justify-content: center;
+        }
+
+        .stats {
+          justify-content: center;
+        }
+
+        .steps {
+          flex-direction: column;
+          gap: 50px;
+        }
+
+        .steps:before {
+          display: none;
+        }
+
+        .step {
+          padding: 0;
+        }
+
+        .section-title h2 {
+          font-size: 2rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          position: fixed;
+          top: 80px;
+          left: -100%;
+          width: 80%;
+          height: calc(100vh - 80px);
+          background-color: white;
+          flex-direction: column;
+          align-items: center;
+          padding: 40px 0;
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+          transition: var(--transition);
+        }
+
+        .nav-links.active {
+          left: 0;
+        }
+
+        .nav-links li {
+          margin: 15px 0;
+        }
+
+        .mobile-menu-btn {
+          display: block;
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero p {
+          font-size: 1rem;
+        }
+
+        .hero-buttons {
+          flex-direction: column;
+        }
+
+        .btn {
+          width: 100%;
+        }
+
+        .stat-item {
+          flex: 1;
+          min-width: 120px;
+        }
+
+        .contact-container {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .hero h1 {
+          font-size: 2rem;
+        }
+
+        .stats {
+          flex-wrap: wrap;
+        }
+
+        .stat-item {
+          flex: 1 1 100%;
+          margin-bottom: 15px;
+        }
+
+        .section-title h2 {
+          font-size: 1.8rem;
+        }
+
+        .payment-content {
+          padding: 30px 20px;
+        }
+
+        .card-row {
+          flex-direction: column;
+          gap: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="header">
+      <div class="container">
+        <nav>
+          <a href="#" class="logo">
+            <img
+              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjNDM2MWVlIiBkPSJNMjU2IDhDMTE5IDggOCAxMTkgOCAyNTZzMTExIDI0OCAyNDggMjQ4IDI0OC0xMTEgMjQ4LTI0OFMzOTMgOCAyNTYgOHptMCA0NDhjLTExMC41IDAtMjAwLTg5LjUtMjAwLTIwMFMxNDUuNSA1NiAyNTYgNTZzMjAwIDg5LjUgMjAwIDIwMC04OS41IDIwMC0yMDAgMjAwem0xMDEuOC0yNjEuN2wtODQuOS02MS43Yy0zLjEtMi4yLTcuMi0yLjItMTAuMyAwbC01NiA0MC43LTE2LjUtMTIuMWMtMy4xLTIuMi03LjItMi4yLTEwLjMgMEwxMzEuNiAyNDBjLTIuMiAxLjYtMi44IDQuNy0xLjIgNi45bDg0LjkgMTI0LjljMS42IDIuMiA0LjcgMi44IDYuOSAxLjJsMTEwLjUtODJuMWMuMy0uMi41LS40LjctLjdsMjQuNS0zNi40LjctLjVjMS42LTIuMiAxLTUuMy0xLjItNi45ek0yNjUgMzA4LjloLTUzLjR2LTUzLjRoNTMuNHY1My40eiIvPjwvc3ZnPg=="
+              alt="Yorum Ekspres Logo"
+            />
+            Yorum<span>Ekspres</span>
+          </a>
+          <ul class="nav-links">
+            <li><a href="#anasayfa">Anasayfa</a></li>
+            <li><a href="#nasil-calisir">Nasıl Çalışır?</a></li>
+            <li><a href="#paketler">Paketler</a></li>
+            <li><a href="#referanslar">Referanslar</a></li>
+            <li><a href="#sss">SSS</a></li>
+            <li><a href="#iletisim">İletişim</a></li>
+          </ul>
+          <button class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" id="anasayfa">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1>Google Yorumlarınızla İşletmenizi Büyütün</h1>
+            <p>
+              Profesyonel Google Maps yorum yönetimi hizmetimizle işletmenizin
+              online itibarını güçlendirin, daha fazla müşteriye ulaşın ve
+              satışlarınızı artırın.
+            </p>
+            <div class="hero-buttons">
+              <a href="#paketler" class="btn">Paketleri İncele</a>
+              <a href="#iletisim" class="btn btn-outline"
+                >Ücretsiz Danışmanlık</a
+              >
+            </div>
+            <div class="stats">
+              <div class="stat-item">
+                <h3>250+</h3>
+                <p>Mutlu Müşteri</p>
+              </div>
+              <div class="stat-item">
+                <h3>4.9</h3>
+                <p>Ortalama Puan</p>
+              </div>
+              <div class="stat-item">
+                <h3>3K+</h3>
+                <p>Yönetilen Yorum</p>
+              </div>
+            </div>
+          </div>
+          <div class="hero-image">
+            <img
+              src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
+              alt="Online İtibar Yönetimi"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="nasil-calisir">
+      <div class="container">
+        <div class="section-title">
+          <h2>Nasıl Çalışır?</h2>
+          <p>
+            Yorum Ekspres ile online itibar yönetiminin kolay adımlarını
+            keşfedin
+          </p>
+        </div>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>Paket Seçimi</h3>
+            <p>
+              İşletmenizin ihtiyaçlarına uygun paketimizi seçin ve siparişinizi
+              oluşturun.
+            </p>
+          </div>
+
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>Bilgi Paylaşımı</h3>
+            <p>
+              İşletme bilgilerinizi ve hedeflerinizi özel danışmanınızla
+              paylaşın.
+            </p>
+          </div>
+
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>Yorum Süreci</h3>
+            <p>
+              Gerçek kullanıcılar tarafından organik ve doğal yorumlar
+              oluşturulur.
+            </p>
+          </div>
+
+          <div class="step">
+            <div class="step-number">4</div>
+            <h3>Sonuçları Görün</h3>
+            <p>
+              Google Maps'te puanınızın ve görünürlüğünüzün arttığını
+              gözlemleyin.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing" id="paketler">
+      <div class="container">
+        <div class="section-title">
+          <h2>Hizmet Paketlerimiz</h2>
+          <p>
+            İşletmenizin ihtiyaçlarına uygun paketi seçin, online itibarınızı
+            güçlendirin
+          </p>
+        </div>
+
+        <div class="pricing-grid">
+          <!-- Standart Paket -->
+          <div class="pricing-card">
+            <h3>Standart</h3>
+            <div class="price">1.499₺ <span>/aylık</span></div>
+            <ul class="pricing-features">
+              <li>20 Adet Organik Yorum</li>
+              <li>Sadece 5 Yıldızlı Yorumlar</li>
+              <li>1 Haftada Teslim</li>
+              <li>7/24 Destek</li>
+              <li>Detaylı Raporlama</li>
+              <li>Yorum Filtreleme</li>
+            </ul>
+            <button
+              class="btn select-package"
+              data-package="Standart"
+              data-price="1499"
+            >
+              Hemen Satın Al
+            </button>
+          </div>
+
+          <!-- Premium Paket -->
+          <div class="pricing-card popular">
+            <div class="popular-tag">POPÜLER</div>
+            <h3>Premium</h3>
+            <div class="price">2.999₺ <span>/aylık</span></div>
+            <ul class="pricing-features">
+              <li>50 Adet Organik Yorum</li>
+              <li>Sadece 5 Yıldızlı Yorumlar</li>
+              <li>3 Günde Teslim</li>
+              <li>7/24 Öncelikli Destek</li>
+              <li>1 Ay Ücretsiz Yönetim</li>
+              <li>Özel İçerik Stratejisi</li>
+            </ul>
+            <button
+              class="btn select-package"
+              data-package="Premium"
+              data-price="2999"
+            >
+              Hemen Satın Al
+            </button>
+          </div>
+
+          <!-- Kurumsal Paket -->
+          <div class="pricing-card">
+            <h3>Kurumsal</h3>
+            <div class="price">4.999₺ <span>/aylık</span></div>
+            <ul class="pricing-features">
+              <li>100 Adet Organik Yorum</li>
+              <li>Sadece 5 Yıldızlı Yorumlar</li>
+              <li>3 Günde Teslim</li>
+              <li>7/24 VIP Destek</li>
+              <li>Özel Yönetici Ataması</li>
+              <li>Detaylı Rekabet Analizi</li>
+              <li>Özel İçerik Üretimi</li>
+            </ul>
+            <button
+              class="btn select-package"
+              data-package="Kurumsal"
+              data-price="4999"
+            >
+              Hemen Satın Al
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="referanslar">
+      <div class="container">
+        <div class="section-title">
+          <h2>Müşteri Yorumları</h2>
+          <p>Bizimle çalışan işletmelerin deneyimleri</p>
+        </div>
+
+        <div class="testimonial-grid">
+          <div class="testimonial-card">
+            <div class="testimonial-header">
+              <img
+                src="https://randomuser.me/api/portraits/men/32.jpg"
+                alt="Müşteri"
+                class="testimonial-avatar"
+              />
+              <div class="testimonial-author">
+                <h4>Ahmet Kaya</h4>
+                <p>Restoran Sahibi</p>
+              </div>
+            </div>
+            <div class="testimonial-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p>
+              "Yorum Ekspres sayesinde restoranımızın Google puanı 3.8'den 4.5'e
+              yükseldi. Müşteri sayımızda gözle görülür bir artış oldu.
+              Profesyonel ve güvenilir bir hizmet, kesinlikle tavsiye ederim!"
+            </p>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-header">
+              <img
+                src="https://randomuser.me/api/portraits/women/44.jpg"
+                alt="Müşteri"
+                class="testimonial-avatar"
+              />
+              <div class="testimonial-author">
+                <h4>Ayşe Demir</h4>
+                <p>Kuaför Salonu Sahibi</p>
+              </div>
+            </div>
+            <div class="testimonial-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p>
+              "Premium paket ile 3 aydır çalışıyoruz. Yorumlar tamamen organik
+              görünüyor ve hiçbir sorun yaşamadık. İşletmeme değer kattılar.
+              Özellikle müşteri hizmetleri çok ilgili."
+            </p>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-header">
+              <img
+                src="https://randomuser.me/api/portraits/men/67.jpg"
+                alt="Müşteri"
+                class="testimonial-avatar"
+              />
+              <div class="testimonial-author">
+                <h4>Mehmet Yılmaz</h4>
+                <p>Otel İşletmecisi</p>
+              </div>
+            </div>
+            <div class="testimonial-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+            <p>
+              "Kurumsal paket ile çalışıyoruz ve çok memnunuz. Özellikle rakip
+              analizleri ve stratejik yönlendirmeleri işimiz için çok değerli
+              oldu. Rezervasyonlarımız %40 arttı."
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="sss">
+      <div class="container">
+        <div class="section-title">
+          <h2>Sıkça Sorulan Sorular</h2>
+          <p>Merak ettiğiniz soruların cevaplarını bulun</p>
+        </div>
+
+        <div class="accordion">
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span>Yorumlar gerçekten organik mi?</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="accordion-content">
+              <p>
+                Evet, tüm yorumlar gerçek kullanıcılar tarafından
+                oluşturulmaktadır. Google'ın algoritmalarını bypass edecek veya
+                politikalarını ihlal edecek hiçbir yöntem kullanmıyoruz.
+                Yorumlar tamamen organik ve doğal bir şekilde oluşturulur.
+              </p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span>Yorumlar ne kadar sürede oluşturulur?</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="accordion-content">
+              <p>
+                Standart pakette yorumlar 1 hafta içinde, Premium pakette 3 gün
+                içinde, Kurumsal pakette ise 24 saat içinde oluşturulur. Süreç
+                tamamen organik olduğu için bu sürelerde küçük değişiklikler
+                olabilir.
+              </p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span>Google yorumları silebilir mi?</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="accordion-content">
+              <p>
+                Oluşturduğumuz yorumlar Google politikalarına tamamen uygundur
+                ve organik olarak oluşturulduğu için silinme riski minimumdur.
+                Ancak Google'ın kendi algoritması herhangi bir yorumu silerse,
+                bu yorumu ücretsiz olarak yeniden oluşturuyoruz.
+              </p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span>Ödeme seçenekleri nelerdir?</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="accordion-content">
+              <p>
+                Tüm kredi ve banka kartlarıyla ödeme yapabilirsiniz. Ayrıca
+                banka havalesi ve EFT seçenekleri de mevcuttur. Kurumsal
+                müşterilerimiz için aylık faturalı ödeme seçeneği sunmaktayız.
+              </p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span>İade politikası nedir?</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="accordion-content">
+              <p>
+                Hizmetimizden memnun kalmazsanız, ilk 7 gün içinde ücret iadesi
+                yapıyoruz. Ancak yorum oluşturma süreci başladıktan sonra iade
+                yapılamamaktadır.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="iletisim">
+      <div class="container">
+        <div class="section-title">
+          <h2>İletişim</h2>
+          <p>
+            Bize ulaşın, işletmeniz için en uygun çözümü birlikte oluşturalım
+          </p>
+        </div>
+
+        <div class="contact-container">
+          <div class="contact-info">
+            <h3>İletişim Bilgileri</h3>
+
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <div class="contact-text">
+                <h4>Adres</h4>
+                <p>Yeni çarşı , No:12<br />Gebze/Kocaeli</p>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fas fa-phone-alt"></i>
+              </div>
+              <div class="contact-text">
+                <h4>Telefon</h4>
+                <span class="name">Kadir Çetin:</span>
+                <p><a href="tel:+905400198401">0540 019 84 01</a></p>
+                <span class="name">Bünyamin İpekli:</span>
+                <p><a href="tel:+905332961834">0533 296 18 34</a></p>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div class="contact-text">
+                <h4>E-posta</h4>
+                <a href="mailto:info@yorumekspres.com">kadircetin2541@icloud.com</a>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div class="contact-text">
+                <h4>Çalışma Saatleri</h4>
+                <p>Pazartesi - Cumartesi<br />09:00 - 23:00</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-form">
+            <h3>Bize Mesaj Gönderin</h3>
+            <form
+              <form
+              id="contactForm"
+              action="https://formspree.io/f/mdkgeeqd"
+              method="POST"
+            >
+              <div class="form-group">
+                <label for="name">Adınız Soyadınız</label>
+                <input type="text" id="name" name="name" required />
+              </div>
+
+              <div class="form-group">
+                <label for="email">E-posta Adresiniz</label>
+                <input type="email" id="email" name="email" required />
+              </div>
+
+              <div class="form-group">
+                <label for="phone">Telefon Numaranız</label>
+                <input type="tel" id="phone" name="phone" />
+              </div>
+
+              <div class="form-group">
+                <label for="message">Mesajınız</label>
+                <textarea id="message" name="message" required></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-block">Mesaj Gönder</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Payment Modal -->
+    <div class="payment-modal" id="paymentModal">
+      <div class="payment-content">
+        <span class="close-btn">&times;</span>
+        <div class="payment-form">
+          <h3>Ödeme Bilgileri</h3>
+          <p class="subtitle" id="selectedPackageText">
+            Premium Paket - 2.999₺
+          </p>
+
+          <div class="form-group">
+            <label for="cardName">Kart Üzerindeki İsim</label>
+            <input type="text" id="cardName" placeholder="Ad Soyad" required />
+          </div>
+
+          <div class="form-group">
+            <label for="cardNumber">Kart Numarası</label>
+            <input
+              type="text"
+              id="cardNumber"
+              placeholder="1234 5678 9012 3456"
+              required
+            />
+          </div>
+
+          <div class="card-row">
+            <div class="form-group">
+              <label for="cardExpiry">Son Kullanma Tarihi</label>
+              <input type="text" id="cardExpiry" placeholder="MM/YY" required />
+            </div>
+            <div class="form-group">
+              <label for="cardCvv">CVV</label>
+              <input type="text" id="cardCvv" placeholder="123" required />
+            </div>
+          </div>
+
+          <div class="card-icons">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/196/196578.png"
+              alt="Visa"
+            />
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/196/196561.png"
+              alt="Mastercard"
+            />
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/196/196566.png"
+              alt="American Express"
+            />
+          </div>
+
+          <button class="btn btn-block" id="payButton">
+            Ödemeyi Tamamla (2.999₺)
+          </button>
+        </div>
+
+        <div class="payment-success">
+          <i class="fas fa-check-circle"></i>
+          <h3>Ödeme Başarılı!</h3>
+          <p id="successMessage">
+            Premium paket satın alımınız tamamlandı. En kısa sürede sizinle
+            iletişime geçeceğiz.
+          </p>
+          <button class="btn" id="closeSuccessBtn">Tamam</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-column">
+            <h3>YorumEkspres</h3>
+            <p>
+              Google Maps yönetimi ve online itibar yönetimi konusunda
+              uzmanlaşmış bir ekibiz. İşletmenizin dijital varlığını
+              güçlendiriyoruz.
+            </p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+
+          <div class="footer-column">
+            <h3>Hızlı Linkler</h3>
+            <ul class="footer-links">
+              <li><a href="#anasayfa">Anasayfa</a></li>
+              <li><a href="#nasil-calisir">Nasıl Çalışır?</a></li>
+              <li><a href="#paketler">Paketler</a></li>
+              <li><a href="#referanslar">Referanslar</a></li>
+              <li><a href="#sss">SSS</a></li>
+              <li><a href="#iletisim">İletişim</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h3>Hizmetlerimiz</h3>
+            <ul class="footer-links">
+              <li><a href="#">Google Yorum Yönetimi</a></li>
+              <li><a href="#">Online İtibar Yönetimi</a></li>
+              <li><a href="#">SEO Danışmanlığı</a></li>
+              <li><a href="#">Sosyal Medya Yönetimi</a></li>
+              <li><a href="#">Dijital Pazarlama</a></li>
+              <li><a href="#">Reklam Yönetimi</a></li>
+            </ul>
+          </div>
+
+          <!-- Footer'daki bülten abonelik formunu şu şekilde güncelleyin: -->
+<!-- Footer içinde -->
+<div class="footer-column">
+    <h3>Bülten Aboneliği</h3>
+    <p>Yeniliklerimiz ve kampanyalarımızdan haberdar olmak için e-posta listemize kaydolun.</p>
+    
+    <form 
+    class="newsletter-form" 
+    action="https://formspree.io/f/mdkgeeqd" 
+    method="POST"
+  >
+    <!-- Eksik parametreleri ekleyin -->
+    <input type="hidden" name="_subject" value="Yeni Bülten Aboneliği">
+    <input type="hidden" name="_replyto" value="info@yorumekspres.com">
+    <input type="hidden" name="_language" value="tr">
+    <input type="text" name="_gotcha" style="display:none">
+
+    <div class="form-group">
+      <input 
+        type="email" 
+        name="email" 
+        placeholder="E-posta Adresiniz" 
+        required
+      >
+    </div>
+    <button type="submit" class="btn">Abone Ol</button>
+  </form>
+</div>
+  </div>
+          </div>
+        <div class="footer-bottom">
+          <p>
+            &copy; 2023 YorumEkspres. Tüm hakları saklıdır.
+            <a href="#">Gizlilik Politikası</a> |
+            <a href="#">Kullanım Şartları</a>
+          </p>
+        </div>
+    </div>
+    </div>
+    </footer>
+
+    <script>
+      // Header Scroll Effect
+      window.addEventListener("scroll", function () {
+        const header = document.getElementById("header");
+        if (window.scrollY > 50) {
+          header.classList.add("scrolled");
+        } else {
+          header.classList.remove("scrolled");
+        }
+      });
+
+      // Mobile Menu Toggle
+      document
+        .querySelector(".mobile-menu-btn")
+        .addEventListener("click", function () {
+          document.querySelector(".nav-links").classList.toggle("active");
+        });
+
+      // Close mobile menu when clicking on a link
+      document.querySelectorAll(".nav-links a").forEach((link) => {
+        link.addEventListener("click", function () {
+          document.querySelector(".nav-links").classList.remove("active");
+        });
+      });
+
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          const targetId = this.getAttribute("href");
+          const targetElement = document.querySelector(targetId);
+
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 80,
+              behavior: "smooth",
+            });
+          }
+        });
+      });
+
+      // Payment Modal
+      const modal = document.getElementById("paymentModal");
+      const selectPackageBtns = document.querySelectorAll(".select-package");
+      const closeBtn = document.querySelector(".close-btn");
+      const payButton = document.getElementById("payButton");
+      const paymentForm = document.querySelector(".payment-form");
+      const paymentSuccess = document.querySelector(".payment-success");
+      const successMessage = document.getElementById("successMessage");
+      const selectedPackageText = document.getElementById(
+        "selectedPackageText"
+      );
+      const closeSuccessBtn = document.getElementById("closeSuccessBtn");
+
+      // Open modal when package is selected
+      selectPackageBtns.forEach((btn) => {
+        btn.addEventListener("click", function () {
+          const packageName = this.getAttribute("data-package");
+          const packagePrice = this.getAttribute("data-price");
+
+          selectedPackageText.textContent = `${packageName} Paket - ${packagePrice}₺`;
+          payButton.textContent = `Ödemeyi Tamamla (${packagePrice}₺)`;
+
+          modal.style.display = "flex";
+          document.body.style.overflow = "hidden";
+        });
+      });
+
+      // Close modal
+      closeBtn.addEventListener("click", function () {
+        modal.style.display = "none";
+        document.body.style.overflow = "auto";
+      });
+
+      // Process payment
+      payButton.addEventListener("click", function () {
+        const packageName = selectedPackageText.textContent.split(" ")[0];
+        const packagePrice = payButton.textContent.match(/\d+/)[0];
+
+        // Form validation
+        const cardName = document.getElementById("cardName").value;
+        const cardNumber = document.getElementById("cardNumber").value;
+        const cardExpiry = document.getElementById("cardExpiry").value;
+        const cardCvv = document.getElementById("cardCvv").value;
+
+        if (!cardName || !cardNumber || !cardExpiry || !cardCvv) {
+          alert("Lütfen tüm ödeme bilgilerini doldurunuz.");
+          return;
+        }
+
+        // Simulate payment processing
+        setTimeout(function () {
+          paymentForm.style.display = "none";
+          paymentSuccess.style.display = "block";
+          successMessage.textContent = `${packageName} paket satın alımınız (${packagePrice}₺) başarıyla tamamlandı. En kısa sürede sizinle iletişime geçeceğiz.`;
+
+          // In a real scenario, you would send the payment details to your backend
+          // and process the payment through a payment gateway like Stripe, Iyzico, etc.
+        }, 1500);
+      });
+
+      // Close success message
+      closeSuccessBtn.addEventListener("click", function () {
+        modal.style.display = "none";
+        document.body.style.overflow = "auto";
+        paymentForm.style.display = "block";
+        paymentSuccess.style.display = "none";
+
+        // Reset form
+        document.getElementById("cardName").value = "";
+        document.getElementById("cardNumber").value = "";
+        document.getElementById("cardExpiry").value = "";
+        document.getElementById("cardCvv").value = "";
+      });
+
+      // Close modal when clicking outside
+      window.addEventListener("click", function (e) {
+        if (e.target === modal) {
+          modal.style.display = "none";
+          document.body.style.overflow = "auto";
+          paymentForm.style.display = "block";
+          paymentSuccess.style.display = "none";
+        }
+      });
+
+      // Contact Form Submission
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const name = document.getElementById("name").value;
+          const email = document.getElementById("email").value;
+
+          alert(
+            `Teşekkürler ${name}! Mesajınız başarıyla gönderildi. En kısa sürede iletişim için bizi 7/24 arayabilirsiniz.`
+          );
+
+          this.reset();
+        });
+
+      // Newsletter Form Submission
+      // Newsletter Form Submission
+document.querySelector(".newsletter-form").addEventListener("submit", async function(e) {
+  e.preventDefault();
+  
+  try {
+    const response = await fetch(this.action, {
+      method: this.method,
+      body: new FormData(this),
+      headers: { 'Accept': 'application/json' }
+    });
+    
+    if (response.ok) {
+      alert('Aboneliğiniz başarıyla alındı!');
+      this.reset();
+    } else {
+      const errorData = await response.json();
+      console.error('Formspree Error:', errorData);
+      alert('Bir hata oluştu, lütfen daha sonra tekrar deneyin.');
+    }
+  } catch (error) {
+    console.error('Hata:', error);
+    alert('Bağlantı hatası oluştu');
+  }
+});
+      // FAQ Accordion
+      const accordionItems = document.querySelectorAll(".accordion-item");
+
+      accordionItems.forEach((item) => {
+        const header = item.querySelector(".accordion-header");
+
+        header.addEventListener("click", function () {
+          // Close all other items
+          accordionItems.forEach((otherItem) => {
+            if (otherItem !== item) {
+              otherItem.classList.remove("active");
+            }
+          });
+
+          // Toggle current item
+          item.classList.toggle("active");
+        });
+      });
+
+      // Credit card number formatting
+      document
+        .getElementById("cardNumber")
+        .addEventListener("input", function (e) {
+          let value = this.value.replace(/\s+/g, ""); // Remove all spaces
+          if (value.length > 0) {
+            value = value.match(new RegExp(".{1,4}", "g")).join(" "); // Add space every 4 digits
+          }
+          this.value = value;
+        });
+
+      // Expiry date formatting
+      document
+        .getElementById("cardExpiry")
+        .addEventListener("input", function (e) {
+          let value = this.value.replace(/\D/g, ""); // Remove non-digits
+          if (value.length > 2) {
+            value = value.substring(0, 2) + "/" + value.substring(2, 4);
+          }
+          this.value = value;
+        });
+    </script>
+  </body>
+</html>
